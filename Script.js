@@ -1,5 +1,7 @@
 /**
  * Created by Emilie on 28/04/2015.
+ 
+ COMMENT FROM ELINU5!!!!
  */
 
 $(document).ready(function() {
