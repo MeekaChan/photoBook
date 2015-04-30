@@ -22,7 +22,7 @@ $(document).ready(function() {
     });
 
     $("#grass").click(function() {
-        $("html").css("background-image", "url(http://static4.depositphotos.com/1004998/325/i/950/depositphotos_3258821-Grass-background---golf-field.jpg)").css("background-size", "cover");
+        $("html").css("background-image", "url(https://lawnstarter.com/blog/wp-content/uploads/2015/01/Yellow-st-augustine-lawn.jpg)").css("background-size", "cover");
     });
 
     $("#pergament").click(function() {
