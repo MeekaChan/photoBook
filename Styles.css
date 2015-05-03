@@ -24,21 +24,25 @@ body {
    font-family: "Helvetica Neue", Arial, sans-serif;
    color: #333333;
    letter-spacing: -2px;
-<<<<<<< HEAD
    font-size: 40pt;
   
 }
 
 .photo_album{
    margin:30px auto;
-   width:933px;
+   width:1600px;
    height:700px;
 }
 
-=======
-   font-size: 26pt;
-    height: 40px;
+/* TURN JS-STYLES */
+.hard {
+  background: #f4f4f4;
 }
+
+.pages {
+  background: #f7f7f7;
+}
+
 
 /*LATER FOR FADE ANIMATIONS*/
 @-webkit-keyframes 'fade-in' {
@@ -133,4 +137,4 @@ body {
     -webkit-animation-timing-function: linear;
     visibility: hidden;
 }
->>>>>>> origin/master
+
