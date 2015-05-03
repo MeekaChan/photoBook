@@ -135,10 +135,10 @@ function loadPhotos() {
     // Mention JSON here
     $.getJSON('https://api.flickr.com/services/rest/?jsoncallback=?', {
         'method': 'flickr.photos.search',
-        'api_key': '33e94eff9adf5b3c5731d777c6633c4a',
+        'api_key': '229833ad396e499afb4c9939fa3f40b6',
         'tags': searchTerms,
         'page': pageNumber,
-        'per_page': '9',
+        'per_page': '4',
         'format': 'json'
     }, function(data) {
         console.log(data);
