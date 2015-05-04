@@ -10,11 +10,16 @@ body {
     height: 100%;
 }
 
+#background-styles {
+    float: left;
+}
+
 #search-form {
    width: 750px;
    margin-top: 15px;
    margin-left: auto;
    margin-right: auto;
+    float: none;
 }
 
 #search-box {
@@ -24,8 +29,7 @@ body {
    font-family: "Helvetica Neue", Arial, sans-serif;
    color: #333333;
    letter-spacing: -2px;
-   font-size: 40pt;
-  
+   font-size: 32pt;
 }
 
 .photo_album{
@@ -138,3 +142,15 @@ body {
     visibility: hidden;
 }
 
+
+.background-button {
+    height: 30px;
+    width: 30px;
+    padding: 2px 2px;
+}
+
+.background-button img {
+    height: 28px;
+    width: auto;
+    overflow: hidden;
+}
