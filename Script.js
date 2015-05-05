@@ -2,6 +2,8 @@
  * Created by Emilie on 28/04/2015.
  */
 
+$ = jQuery;
+
 $(document).ready(function() {
     $("#table").click(function() {
 	    $("html").css("background-image", "url(Images/Background/wooden_tabletop_1012121.JPG)").css("background-size", "cover");
