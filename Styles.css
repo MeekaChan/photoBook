@@ -34,8 +34,14 @@ body {
 
 .photo_album{
    margin:30px auto;
-   width:1600px;
+   width:100%;
    height:700px;
+}
+
+#flipbook{
+    width:800px !important;
+    margin:0px auto !important;
+
 }
 
 /* TURN JS-STYLES */
@@ -103,6 +109,8 @@ body {
     background-position: center center;
     background-size: cover;
 }
+
+
 
 #photo-container .photo:not(:nth-child(3n)) {
     margin-right: 5px;
