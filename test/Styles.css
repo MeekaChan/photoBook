@@ -1,4 +1,4 @@
-html /* maybe not necessary */ {
+html {
     background: url(http://mayang.com/textures/Wood/images/Flat%20Wood%20Textures/wooden_tabletop_1012121.JPG) no-repeat center center fixed; 
 	-webkit-background-size: cover;
 	-moz-background-size: cover;
@@ -10,14 +10,16 @@ body {
     height: 100%;
 }
 
-/*SEARCH BAR*/
+#background-styles {
+    float: left;
+}
 
 #search-form {
    width: 750px;
    margin-top: 15px;
    margin-left: auto;
    margin-right: auto;
-   float: none;
+    float: none;
 }
 
 #search-box {
@@ -29,6 +31,22 @@ body {
    letter-spacing: -2px;
    font-size: 32pt;
 }
+
+.photo_album{
+   margin:30px auto;
+   width:1600px;
+   height:700px;
+}
+
+/* TURN JS-STYLES */
+.hard {
+  background: #f4f4f4;
+}
+
+.pages {
+  background: #f7f7f7;
+}
+
 
 /*LATER FOR FADE ANIMATIONS*/
 @-webkit-keyframes 'fade-in' {
@@ -62,7 +80,6 @@ body {
 }
 
 /*PHOTO CONTAINER*/
-
 #photo-and-controls-container {
     width: 1000px;
     margin-left: auto;
@@ -91,8 +108,6 @@ body {
     margin-right: 5px;
 }
 
-/*NAVIGATION ARROWS*/
-
 .nav-button {
     width: 60px;
     height: 60px;
@@ -113,7 +128,20 @@ body {
     background-image: url('Images/right_arrow.png');
 }
 
-/*BACKROUND CHANGING BUTTONS*/
+#loading-bar {
+    position: absolute;
+    width: 100px;
+    height: 20px;
+    background-color: #333333;
+    left: 450px;
+    top: 370px;
+    -webkit-animation-name: 'rotate';
+    -webkit-animation-duration: 2.0s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+    visibility: hidden;
+}
+
 
 .background-button {
     height: 30px;
@@ -125,8 +153,4 @@ body {
     height: 28px;
     width: auto;
     overflow: hidden;
-}
-
-#background-styles {
-    float: left;
 }
