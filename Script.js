@@ -9,13 +9,9 @@ var pageNumber;
 var navLeftButton;
 var navRightButton;
 
-$(document).ready(function() {
+var dragSourceElement;
 
-    $("#flipbook").turn({
-        width: 1600,
-        height: 567,
-        autoCenter: true,
-    });
+$(document).ready(function() {
 
     $("#table").click(function() {
         $("html").css("background-image", "url(Images/Background/wooden_tabletop_1012121.JPG)").css("background-size", "cover");
@@ -33,16 +29,22 @@ $(document).ready(function() {
         $("html").css("background", "#FFCDAA", "background-image", "url(none)").css("background-size", "cover");
     });
 
+    $("#flipbook").turn({
+        width: 800,
+        height: 567,
+        autoCenter: true
+    });
+
     // Add empty photo <divs>
     for (var i = 0; i < 10; i++) {
         if (i<3){
-        $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-1');
+            $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-1');
         }
         else if (i<6 && i>2){
-        $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-2');
+            $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-2');
         }
         else if (i<10 && i>5){
-        $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-3');
+            $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-3');
         }
     }
 
@@ -52,21 +54,19 @@ $(document).ready(function() {
     navLeftButton.addClass('fade-out');
     navRightButton.addClass('fade-out');
 
-    console.log('document loaded');
-
-    // Remove the 'visibility: hidden' CSS property
-    // is executing for the first time
-    if ($('.nav-button').css('visibility') == 'hidden') {
-        $('.nav-button').css('visibility', 'visible');
-    }
-
-    // Fade out nav buttons (as required)
-    if (navLeftButton.hasClass('fade-in')) {
-        navLeftButton.removeClass('fade-in').addClass('fade-out');
-    }
-    if (navRightButton.hasClass('fade-in')) {
-        navRightButton.removeClass('fade-in').addClass('fade-out');
-    }
+    /*console.log('document loaded');
+     // Remove the 'visibility: hidden' CSS property
+     // is executing for the first time
+     if ($('.nav-button').css('visibility') == 'hidden') {
+     $('.nav-button').css('visibility', 'visible');
+     }
+     // Fade out nav buttons (as required)
+     if (navLeftButton.hasClass('fade-in')) {
+     navLeftButton.removeClass('fade-in').addClass('fade-out');
+     }
+     if (navRightButton.hasClass('fade-in')) {
+     navRightButton.removeClass('fade-in').addClass('fade-out');
+     }*/
 
     // Handle submit event
     $('#search-form').submit(function(e) {
@@ -104,23 +104,15 @@ $(document).ready(function() {
     $('.nav-right').click(function() {
         pageNumber++;
         loadPhotos();
-        
     });
 
     // Prev button click
     $('.nav-left').click(function() {
         if (pageNumber > 1)
             pageNumber--;
-            loadPhotos();
+        loadPhotos();
     });
-
-    
 });
-
-
-
-
-
 
 function loadPhotos() {
 
@@ -139,11 +131,11 @@ function loadPhotos() {
         }
     }
 
+    // Add draggable class to photos
+    $('.photo').addClass('draggable');
+
     // Fade out existing photos
     $('.photo').addClass('fade-out');
-
-    // Show loading bar
-    /*$('#loading-bar').css('visibility', 'visible');*/
 
     // Mention JSON here
     $.getJSON('https://api.flickr.com/services/rest/?jsoncallback=?', {
@@ -155,9 +147,6 @@ function loadPhotos() {
         'format': 'json'
     }, function(data) {
         console.log(data);
-
-        // Hide loading bar
-        //$('#loading-bar').css('visibility', 'hidden');
 
         // jQuery loop
         $.each(data.photos.photo, function(i, photo) {
@@ -172,13 +161,33 @@ function loadPhotos() {
                 $('#photo-' + imageDataNum).css('background-image', 'url(' + imgURL + ')').removeClass('fade-out').addClass('fade-in');
             });
         });
+
+        $(".draggable").attr('draggable', 'true').bind('dragstart', function() {
+            dragSourceElement = this;
+            $(this).css({
+                'opacity': '0.5',
+                'box-shadow': '0px, 0px, 5px rgba(0, 0, 0, 1)'
+            });
+        });
+
+        $(".draggable").attr('draggable', 'true').bind('dragstart', function() {
+            dragSourceElement = this;
+            $(this).css({
+                'opacity': '1',
+                'box-shadow': 'none'
+            });
+        });
+
+        $('#target').each(function(){
+            $(this).bind('dragover', function(event) {
+                event.preventDefault();
+            });
+
+            $(this).bind('drop', function(event) {
+                event.preventDefault();
+                //$(dragSourceElement).hide();
+                alert("Picture added to MyPhotoBook!");
+            });
+        });
     });
 }
-
-
-
-
-
-
-
-

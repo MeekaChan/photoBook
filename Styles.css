@@ -1,76 +1,91 @@
 html {
-    background: url(http://mayang.com/textures/Wood/images/Flat%20Wood%20Textures/wooden_tabletop_1012121.JPG) no-repeat center center fixed; 
-	-webkit-background-size: cover;
-	-moz-background-size: cover;
-	-o-background-size: cover;
-	background-size: cover;
+    background: url(http://mayang.com/textures/Wood/images/Flat%20Wood%20Textures/wooden_tabletop_1012121.JPG) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 body {
     height: 100%;
 }
 
+/*BACKGROUND BUTTONS*/
+
 #background-styles {
     float: left;
 }
 
+.background-button {
+    height: 30px;
+    width: 30px;
+    padding: 2px 2px;
+}
+
+.background-button img {
+    height: 28px;
+    width: auto;
+    overflow: hidden;
+}
+
+/*SEARCHFORM*/
+
 #search-form {
-   width: 750px;
-   margin-top: 15px;
-   margin-left: auto;
-   margin-right: auto;
+    width: 750px;
+    margin-top: 15px;
+    margin-left: auto;
+    margin-right: auto;
     float: none;
 }
 
 #search-box {
-   border: none;
-   border-bottom: 1px solid #999;
-   width: 100%;
-   font-family: "Helvetica Neue", Arial, sans-serif;
-   color: #333333;
-   letter-spacing: -2px;
-   font-size: 32pt;
+    border: none;
+    border-bottom: 1px solid #999;
+    width: 100%;
+    font-family: "Helvetica Neue", Arial, sans-serif;
+    color: #333333;
+    letter-spacing: -2px;
+    font-size: 32pt;
 }
 
+/*PHOTO ALBUM*/
+
 .photo_album{
-   margin:30px auto;
-   width:800px;
-   height:700px;
+    margin:30px auto;
+    width:800px;
+    height:700px;
 }
 /*
 #flipbook{
     width:800px !important;
     margin:0px auto !important;
-
 }
-
 */
 
 /* TURN JS-STYLES */
 .hard {
-  background: #f4f4f4;
+    background: #f4f4f4;
 }
 
 .pages {
-  background: #f7f7f7;
+    background: #f7f7f7;
 }
-
 
 /*LATER FOR FADE ANIMATIONS*/
 @-webkit-keyframes 'fade-in' {
     from {
         opacity: 0.0;
     } to {
-        opacity: 1.0;
-    }
+          opacity: 1.0;
+      }
 }
 
 @-webkit-keyframes 'fade-out' {
     from {
         opacity: 1.0;
     } to {
-        opacity: 0.0;
-    }
+          opacity: 0.0;
+      }
 }
 
 .fade-in {
@@ -89,14 +104,13 @@ body {
 
 /*PHOTO CONTAINER*/
 #photo-and-controls-container {
-width:400px;
-height: 567px;
-overflow: hidden;
+    width:400px;
+    height: 567px;
+    overflow: hidden;
 }
 
 #photo-container-1, #photo-container-2, #photo-container-3 {
-
-width:400px;
+    width:400px;
 }
 
 .photo {
@@ -109,16 +123,15 @@ width:400px;
     margin-top: 5px;
 }
 
-<<<<<<< HEAD
-=======
 .even .photo {
     margin-left: 55px;
 }
 
->>>>>>> origin/master
 #photo-container .photo:not(:nth-child(3n)) {
     margin-right: 5px;
 }
+
+/*NAVIGATION*/
 
 .nav-button {
     width: 60px;
@@ -140,24 +153,20 @@ width:400px;
     background-image: url('Images/right_arrow.png');
 }
 
-.background-button {
-    height: 30px;
-    width: 30px;
-    padding: 2px 2px;
-}
-
-.background-button img {
-    height: 28px;
-    width: auto;
-    overflow: hidden;
-}
-
 /*MYPHOTOBOOK*/
+
 #MyPhotobook {
     float: right;
+    margin-top: 10px;
 }
 
 #MyPhotobook img {
     width: 200px;
     height: auto;
+}
+
+/*DRAG'N'DROP*/
+
+.draggable {
+    cursor: move;
 }
