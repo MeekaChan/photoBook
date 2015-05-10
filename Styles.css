@@ -34,15 +34,17 @@ body {
 
 .photo_album{
    margin:30px auto;
-   width:100%;
+   width:800px;
    height:700px;
 }
-
+/*
 #flipbook{
     width:800px !important;
     margin:0px auto !important;
 
 }
+
+*/
 
 /* TURN JS-STYLES */
 .hard {
@@ -87,29 +89,33 @@ body {
 
 /*PHOTO CONTAINER*/
 #photo-and-controls-container {
-    width: 1000px;
-    margin-left: auto;
-    margin-right: auto;
-    position: relative;
+width:400px;
+height: 567px;
+overflow: hidden;
 }
 
-#photo-container {
-    width: 760px;
-    height: 760px;
-    overflow: hidden;
-    margin: 20px auto 100px;
+#photo-container-1, #photo-container-2, #photo-container-3 {
 
+width:400px;
 }
 
-#photo-container .photo {
-    width: 250px;
-    height: 250px;
+.photo {
+    width: 330px;
+    height: 182px;
     margin-bottom: 5px;
-    float: left;
-    background-position: center center;
+    margin-left: 5px;
     background-size: cover;
+    background-position: center center;
+    margin-top: 5px;
 }
 
+<<<<<<< HEAD
+=======
+.even .photo {
+    margin-left: 55px;
+}
+
+>>>>>>> origin/master
 #photo-container .photo:not(:nth-child(3n)) {
     margin-right: 5px;
 }
