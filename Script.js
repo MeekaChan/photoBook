@@ -2,9 +2,23 @@
  * Created by Emilie on 28/04/2015.
  */
 
+// Global variables - need to keep state within the Web App
+var searchTerms;
+var pageNumber;
+
+var navLeftButton;
+var navRightButton;
+
 $(document).ready(function() {
+
+    $("#flipbook").turn({
+        width: 1600,
+        height: 567,
+        autoCenter: true,
+    });
+
     $("#table").click(function() {
-	    $("html").css("background-image", "url(Images/Background/wooden_tabletop_1012121.JPG)").css("background-size", "cover");
+        $("html").css("background-image", "url(Images/Background/wooden_tabletop_1012121.JPG)").css("background-size", "cover");
     });
 
     $("#concrete").click(function() {
@@ -19,23 +33,6 @@ $(document).ready(function() {
         $("html").css("background", "#FFCDAA", "background-image", "url(none)").css("background-size", "cover");
     });
 
-    /*ORIGINAL BACKGROUND BUTTON*/
-    /*$("#concrete").click(function() {
-        $("html").css("background-image", "url(" + allImages[current] + ")").css("background-repeat");
-                
-        current = (current++ < allImages.length - 1) ? current : 0 ;
-    });*/
-});
-
-// Global variables - need to keep state within the Web App
-var searchTerms;
-var pageNumber;
-
-var navLeftButton;
-var navRightButton;
-
-$(document).ready(function() {
-
     // Add empty photo <divs>
     for (var i = 0; i < 10; i++) {
         $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container');
@@ -47,7 +44,7 @@ $(document).ready(function() {
     navLeftButton.addClass('fade-out');
     navRightButton.addClass('fade-out');
 
-    /*console.log('document loaded');
+    console.log('document loaded');
 
     // Remove the 'visibility: hidden' CSS property
     // is executing for the first time
@@ -61,7 +58,7 @@ $(document).ready(function() {
     }
     if (navRightButton.hasClass('fade-in')) {
         navRightButton.removeClass('fade-in').addClass('fade-out');
-    }*/
+    }
 
     // Handle submit event
     $('#search-form').submit(function(e) {

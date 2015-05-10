@@ -110,8 +110,6 @@ body {
     background-size: cover;
 }
 
-
-
 #photo-container .photo:not(:nth-child(3n)) {
     margin-right: 5px;
 }
@@ -136,21 +134,6 @@ body {
     background-image: url('Images/right_arrow.png');
 }
 
-#loading-bar {
-    position: absolute;
-    width: 100px;
-    height: 20px;
-    background-color: #333333;
-    left: 450px;
-    top: 370px;
-    -webkit-animation-name: 'rotate';
-    -webkit-animation-duration: 2.0s;
-    -webkit-animation-iteration-count: infinite;
-    -webkit-animation-timing-function: linear;
-    visibility: hidden;
-}
-
-
 .background-button {
     height: 30px;
     width: 30px;
@@ -161,4 +144,14 @@ body {
     height: 28px;
     width: auto;
     overflow: hidden;
+}
+
+/*MYPHOTOBOOK*/
+#MyPhotobook {
+    float: right;
+}
+
+#MyPhotobook img {
+    width: 200px;
+    height: auto;
 }
