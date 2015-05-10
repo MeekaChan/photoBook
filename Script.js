@@ -35,15 +35,7 @@ $(document).ready(function() {
 
     // Add empty photo <divs>
     for (var i = 0; i < 10; i++) {
-        if (i<3){
-        $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-1');
-        }
-        else if (i<6 && i>2){
-        $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-2');
-        }
-        else if (i<10 && i>5){
-        $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-3');
-        }
+        $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container');
     }
 
     navLeftButton = $('.nav-left');
@@ -104,23 +96,15 @@ $(document).ready(function() {
     $('.nav-right').click(function() {
         pageNumber++;
         loadPhotos();
-        
     });
 
     // Prev button click
     $('.nav-left').click(function() {
         if (pageNumber > 1)
             pageNumber--;
-            loadPhotos();
+        loadPhotos();
     });
-
-    
 });
-
-
-
-
-
 
 function loadPhotos() {
 
@@ -151,7 +135,7 @@ function loadPhotos() {
         'api_key': '229833ad396e499afb4c9939fa3f40b6',
         'tags': searchTerms,
         'page': pageNumber,
-        'per_page': '9',
+        'per_page': '4',
         'format': 'json'
     }, function(data) {
         console.log(data);
@@ -174,11 +158,3 @@ function loadPhotos() {
         });
     });
 }
-
-
-
-
-
-
-
-
