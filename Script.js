@@ -9,9 +9,9 @@ var pageNumber;
 var navLeftButton;
 var navRightButton;
 
-var dragSourceElement;
-
 $(document).ready(function() {
+
+    //localStorage.clear();
 
     $("#table").click(function() {
         $("html").css("background-image", "url(Images/Background/wooden_tabletop_1012121.JPG)").css("background-size", "cover");
@@ -41,6 +41,18 @@ $(document).ready(function() {
         autoCenter: true
     });
 
+    /*FLIPBOOK*/
+    // Set pageNumber to 1
+    pageNumber = 1;
+
+    //Add a photo container to the first page:
+    $('.pages').append("<div id='photo-container-" + pageNumber + "'></div>");
+
+    // Add empty photo <divs>
+    for (var i = 0; i < 3; i++) {
+        $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + pageNumber);
+    }
+
     // Add empty photo <divs>
     for (var i = 0; i < 10; i++) {
         if (i<3){
@@ -54,11 +66,17 @@ $(document).ready(function() {
         }
     }
 
+    console.log(localStorage["localImages"]);
+
     navLeftButton = $('.nav-left');
     navRightButton = $('.nav-right');
 
     navLeftButton.addClass('fade-out');
     navRightButton.addClass('fade-out');
+
+    /*$("body").on("mousedown", function() {
+        console.log("Hello Foo");
+    })*/
 
     /*console.log('document loaded');
      // Remove the 'visibility: hidden' CSS property
@@ -100,29 +118,73 @@ $(document).ready(function() {
         searchTerms = $('#search-box').val();
         console.log(searchTerms);
 
-        // Set pageNumber to 1
-        pageNumber = 1;
-
         loadPhotos();
+
+        //Open photo album
+        $("#flipbook").turn("next");
     });
 
     // Next button click
     $('.nav-right').click(function() {
+        //var currentPage = $("#flipbook").turn('page');
         pageNumber++;
+
+        newContainerOdd = $("<div />");
+        $("#flipbook").turn("addPage", newContainerOdd, (pageNumber+4));
+        // $('<div />', {"id": "photo-container-" + (pageNumber + 4)}).appendTo('.p' + (pageNumber+4));
+
+        //Create a photo container on the current page:
+        //$(currentPage).append("<div id='photo-container-" + pageNumber + "'></div>");
+
+        for (var i = 4; i < 7; i++) {
+            $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + pageNumber);
+        }
+        // 1) Find a way to dynamically assign the correct numbers to the photos inside the photo-containers (AND THE PHOTOCONTAINERS ALSO)
+        // 2) Create two pages at a time (since two are displayed at the same time in the book)
+        // 3) Make the different photo-# unique - aka do not change when loadPhotos()-function is called.
+        $("#flipbook").turn("next");
         loadPhotos();
     });
+
+    /*$('.nav-right').click(function() {
+        pageNumber++;
+        loadPhotos();
+    });*/
 
     // Prev button click
     $('.nav-left').click(function() {
         if (pageNumber > 1)
             pageNumber--;
         loadPhotos();
+        $("#flipbook").turn("previous");
     });
 
-    var dataImage = localStorage.getItem('imgData');
-    bannerImg = document.getElementById('tableBanner');
-    bannerImg.src = "data:image/png;base64," + dataImage;
+    if (localStorage["localImages"]) {
+        var storedImages = JSON.parse(localStorage["localImages"]);
+        console.log(storedImages);
+        var photoString = "";
+        for (i = 0; i < storedImages.length; i++) {
+            photoString+="<img src='"+storedImages[i]+"'>";
+        }
+        console.log(photoString);
+        $('#storagePic').append(photoString);
+    } else {
+        console.log("No stored images");
+    }
+
+    //var dataImage = localStorage.getItem('imgData');
+    //bannerImg = document.getElementById('storagePic');
+    //$(bannerImg).append("<img src='"+dataImage+"'>");
+    //console.log(storedImages);
+    //bannerImg.src = "data:image/png;base64," + dataImage;
+
 });
+
+//Create empty array
+var localImages = [];
+if (localStorage["localImages"]) {
+    localImages = JSON.parse(localStorage["localImages"]);
+}
 
 function loadPhotos() {
 
@@ -142,7 +204,8 @@ function loadPhotos() {
     }
 
     // Add draggable class to photos
-    $('.photo').addClass('draggable');
+    //$('.photo').addClass('draggable');
+    //console.log($('div.photo img'));
 
     // Fade out existing photos
     $('.photo').addClass('fade-out');
@@ -153,7 +216,7 @@ function loadPhotos() {
         'api_key': '229833ad396e499afb4c9939fa3f40b6',
         'tags': searchTerms,
         'page': pageNumber,
-        'per_page': '9',
+        'per_page': '3',
         'format': 'json'
     }, function(data) {
         console.log(data);
@@ -161,24 +224,31 @@ function loadPhotos() {
         // jQuery loop
         $.each(data.photos.photo, function(i, photo) {
             var imgURL = 'http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_n.jpg';
-
-            console.log(imgURL);
+            //console.log(i);
+            //console.log(imgURL);
 
             // Pre-cache image
             $('<img />').attr({'src': imgURL, 'data-image-num': i}).load(function() {
                 console.log('image loaded');
                 var imageDataNum = $(this).attr('data-image-num');
-                $('#photo-' + imageDataNum).css('background-image', 'url(' + imgURL + ')').removeClass('fade-out').addClass('fade-in');
+                //$('#photo-' + imageDataNum).css('background-image', 'url(' + imgURL + ')').removeClass('fade-out').addClass('fade-in');
+                $('#photo-' + imageDataNum).append("<img class='draggable' id='img"+i+"' src='" + imgURL + "' >").removeClass('fade-out').addClass('fade-in');
             });
         });
+
+        $('body').on("mousedown", function() {
+
+        var dragSourceElement;
 
         $(".draggable").attr('draggable', 'true')
             .bind('dragstart', function() {
             dragSourceElement = this;
+                //console.log("HERE!" + this);
             $(this).css({
                 'opacity': '0.5',
                 'box-shadow': '0px, 0px, 5px rgba(0, 0, 0, 1)'
             });
+
         }).bind('dragend', function() {
             dragSourceElement = this;
             $(this).css({
@@ -189,23 +259,35 @@ function loadPhotos() {
 
         $('#target').each(function(){
             $(this).bind('dragover', function(event) {
+                imageID = $(this).attr('id');
+                //alert(imageID);
                 event.preventDefault();
             });
 
             $(this).bind('drop', function(event) {
                 event.preventDefault();
                 //$(dragSourceElement).hide();
-                alert("Picture added to MyPhotoBook!");
-                storagePhoto = document.getElementById(this.id);
-                imgData = getBase64Image(storagePhoto);
-                localStorage.setItem("imgData", imgData);
+                //alert("Picture added to MyPhotoBook!");
+                //alert(dragSourceElement);
+                //alert(dragSourceElement.getAttribute('id'));
+                storagePhoto = dragSourceElement.getAttribute('src');
+                //imgData = getBase64Image(storagePhoto);
+                //add image to array
+                console.log(localImages);
+                localImages.push(storagePhoto);
+                console.log(localImages);
+                //Save the array to local storage
+                localStorage["localImages"] = JSON.stringify(localImages);
+                //localStorage.setItem("imgData", storagePhoto);
+                //console.log(storagePhoto);
 
             });
+        });
         });
     });
 }
 
-function getBase64Image(img) {
+/*function getBase64Image(img) {
     // Create an empty canvas element
     var canvas = document.createElement("canvas");
     canvas.width = img.width;
@@ -219,4 +301,4 @@ function getBase64Image(img) {
     var dataURL = canvas.toDataURL("image/png");
 
     return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}
+}*/
