@@ -155,12 +155,12 @@ body {
 
 /*MYPHOTOBOOK*/
 
-#MyPhotobook {
+#my_photo_book_target {
     float: right;
     margin-top: 10px;
 }
 
-#MyPhotobook img {
+#my_photo_book_target img {
     width: 200px;
     height: auto;
 }
@@ -169,4 +169,9 @@ body {
 
 .draggable {
     cursor: move;
+}
+
+#storagePic {
+    height: 100px;
+    wifth: 100px;
 }

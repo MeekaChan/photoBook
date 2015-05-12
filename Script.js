@@ -35,6 +35,12 @@ $(document).ready(function() {
         autoCenter: true
     });
 
+    $("#my_photo_book").turn({
+        width: 800,
+        height: 567,
+        autoCenter: true
+    });
+
     // Add empty photo <divs>
     for (var i = 0; i < 10; i++) {
         if (i<3){
@@ -112,6 +118,10 @@ $(document).ready(function() {
             pageNumber--;
         loadPhotos();
     });
+
+    var dataImage = localStorage.getItem('imgData');
+    bannerImg = document.getElementById('tableBanner');
+    bannerImg.src = "data:image/png;base64," + dataImage;
 });
 
 function loadPhotos() {
@@ -162,15 +172,14 @@ function loadPhotos() {
             });
         });
 
-        $(".draggable").attr('draggable', 'true').bind('dragstart', function() {
+        $(".draggable").attr('draggable', 'true')
+            .bind('dragstart', function() {
             dragSourceElement = this;
             $(this).css({
                 'opacity': '0.5',
                 'box-shadow': '0px, 0px, 5px rgba(0, 0, 0, 1)'
             });
-        });
-
-        $(".draggable").attr('draggable', 'true').bind('dragstart', function() {
+        }).bind('dragend', function() {
             dragSourceElement = this;
             $(this).css({
                 'opacity': '1',
@@ -187,7 +196,27 @@ function loadPhotos() {
                 event.preventDefault();
                 //$(dragSourceElement).hide();
                 alert("Picture added to MyPhotoBook!");
+                storagePhoto = document.getElementById(this.id);
+                imgData = getBase64Image(storagePhoto);
+                localStorage.setItem("imgData", imgData);
+
             });
         });
     });
+}
+
+function getBase64Image(img) {
+    // Create an empty canvas element
+    var canvas = document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    // Copy the image contents to the canvas
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    // Get the data-URL formatted image
+    var dataURL = canvas.toDataURL("image/png");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
 }
