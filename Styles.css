@@ -48,7 +48,7 @@ body {
     font-size: 32pt;
 }
 
-/*PHOTO ALBUM*/
+/*FLIPBOOK*/
 
 .photo_album{
     margin:30px auto;
@@ -59,8 +59,7 @@ body {
 #flipbook{
     width:800px !important;
     margin:0px auto !important;
-}
-*/
+}*/
 
 #flipbook .page-wrapper{
     -webkit-perspective:2000px;
@@ -76,46 +75,6 @@ body {
     -ms-box-shadow: 0 4px 10px #666;
     -o-box-shadow: 0 4px 10px #666;
     box-shadow: 0 4px 10px #666;
-}
-
-/* TURN JS-STYLES */
-.hard {
-    background: #f4f4f4;
-}
-
-.pages {
-    background: #f7f7f7;
-}
-
-/*LATER FOR FADE ANIMATIONS*/
-@-webkit-keyframes 'fade-in' {
-    from {
-        opacity: 0.0;
-    } to {
-          opacity: 1.0;
-      }
-}
-
-@-webkit-keyframes 'fade-out' {
-    from {
-        opacity: 1.0;
-    } to {
-          opacity: 0.0;
-      }
-}
-
-.fade-in {
-    -webkit-animation-name: 'fade-in';
-    -webkit-animation-direction: normal;
-    -webkit-animation-duration: 0.5s;
-    -webkit-animation-fill-mode: forwards;
-}
-
-.fade-out {
-    -webkit-animation-name: 'fade-out';
-    -webkit-animation-direction: normal;
-    -webkit-animation-duration: 0.5s;
-    -webkit-animation-fill-mode: forwards;
 }
 
 /*PHOTO CONTAINER*/
@@ -148,28 +107,6 @@ body {
     margin-right: 5px;
 }
 
-/*NAVIGATION*/
-
-.nav-button {
-    width: 60px;
-    height: 60px;
-    position: absolute;
-    top: 350px;
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-}
-
-.nav-left {
-    left: 15px;
-    background-image: url('Images/left_arrow.png');
-}
-
-.nav-right {
-    right: 15px;
-    background-image: url('Images/right_arrow.png');
-}
-
 /*MYPHOTOBOOK*/
 
 #my_photo_book_target {
@@ -191,4 +128,66 @@ body {
 #storagePic {
     height: 100px;
     wifth: 100px;
+}
+
+/*TURN JS-STYLES*/
+.hard {
+    background: #f4f4f4;
+}
+
+.pages {
+    background: #f7f7f7;
+}
+
+/*LATER FOR FADE ANIMATIONS*/
+@-webkit-keyframes 'fade-in' {
+    from {
+        opacity: 0.0;
+    } to {
+          opacity: 1.0;
+    }
+}
+
+@-webkit-keyframes 'fade-out' {
+    from {
+        opacity: 1.0;
+    } to {
+          opacity: 0.0;
+    }
+}
+
+.fade-in {
+    -webkit-animation-name: 'fade-in';
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+.fade-out {
+    -webkit-animation-name: 'fade-out';
+    -webkit-animation-direction: normal;
+    -webkit-animation-duration: 0.5s;
+    -webkit-animation-fill-mode: forwards;
+}
+
+/*NAVIGATION*/
+
+.nav-button {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    top: 350px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.nav-left {
+    left: 15px;
+    background-image: url('Images/left_arrow.png');
+}
+
+.nav-right {
+    right: 15px;
+    background-image: url('Images/right_arrow.png');
 }

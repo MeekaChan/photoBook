@@ -9,10 +9,17 @@ var pageNumber;
 var navLeftButton;
 var navRightButton;
 
+//Create empty array
+var localImages = [];
+if (localStorage["localImages"]) {
+    localImages = JSON.parse(localStorage["localImages"]);
+}
+
 $(document).ready(function() {
 
     //localStorage.clear();
 
+    /*BACKGROUND BUTTONS*/
     $("#table").click(function() {
         $("html").css("background-image", "url(Images/Background/wooden_tabletop_1012121.JPG)").css("background-size", "cover");
     });
@@ -29,6 +36,8 @@ $(document).ready(function() {
         $("html").css("background", "#FFCDAA", "background-image", "url(none)").css("background-size", "cover");
     });
 
+    /*INITIATE FLIPBOOK*/
+
     $("#flipbook").turn({
         width: 800,
         height: 567,
@@ -41,13 +50,17 @@ $(document).ready(function() {
         autoCenter: true
     });
 
-    /*FLIPBOOK*/
+    console.log("Flipbook created")
+
     // Set pageNumber to 1
     pageNumber = 1;
 
     //Add a photo container to the first page:
     $('.pages').append("<div id='photo-container-" + pageNumber + "'></div>");
 
+    console.log("Photo container added")
+
+    /*----------------------Two of the same??------------------------*/
     // Add empty photo <divs>
     for (var i = 0; i < 3; i++) {
         $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + pageNumber);
@@ -66,31 +79,15 @@ $(document).ready(function() {
         }
     }
 
-    console.log(localStorage["localImages"]);
+    /*----------------------Two of the same??------------------------*/
+
+    console.log("Empty photo <div>s added");
 
     navLeftButton = $('.nav-left');
     navRightButton = $('.nav-right');
 
     navLeftButton.addClass('fade-out');
     navRightButton.addClass('fade-out');
-
-    /*$("body").on("mousedown", function() {
-        console.log("Hello Foo");
-    })*/
-
-    /*console.log('document loaded');
-     // Remove the 'visibility: hidden' CSS property
-     // is executing for the first time
-     if ($('.nav-button').css('visibility') == 'hidden') {
-     $('.nav-button').css('visibility', 'visible');
-     }
-     // Fade out nav buttons (as required)
-     if (navLeftButton.hasClass('fade-in')) {
-     navLeftButton.removeClass('fade-in').addClass('fade-out');
-     }
-     if (navRightButton.hasClass('fade-in')) {
-     navRightButton.removeClass('fade-in').addClass('fade-out');
-     }*/
 
     // Handle submit event
     $('#search-form').submit(function(e) {
@@ -143,18 +140,16 @@ $(document).ready(function() {
         // 2) Create two pages at a time (since two are displayed at the same time in the book)
         // 3) Make the different photo-# unique - aka do not change when loadPhotos()-function is called.
         $("#flipbook").turn("next");
+
+        /*----------------------Maybe not load pictures again??------------------------*/
         loadPhotos();
     });
-
-    /*$('.nav-right').click(function() {
-        pageNumber++;
-        loadPhotos();
-    });*/
 
     // Prev button click
     $('.nav-left').click(function() {
         if (pageNumber > 1)
             pageNumber--;
+        /*----------------------Maybe not load pictures again??------------------------*/
         loadPhotos();
         $("#flipbook").turn("previous");
     });
@@ -172,19 +167,13 @@ $(document).ready(function() {
         console.log("No stored images");
     }
 
-    //var dataImage = localStorage.getItem('imgData');
-    //bannerImg = document.getElementById('storagePic');
-    //$(bannerImg).append("<img src='"+dataImage+"'>");
-    //console.log(storedImages);
-    //bannerImg.src = "data:image/png;base64," + dataImage;
-
+    /*----------------------Old local storage------------------------*/
+    /*var dataImage = localStorage.getItem('imgData');
+    bannerImg = document.getElementById('storagePic');
+    $(bannerImg).append("<img src='"+dataImage+"'>");
+    console.log(storedImages);
+    bannerImg.src = "data:image/png;base64," + dataImage;*/
 });
-
-//Create empty array
-var localImages = [];
-if (localStorage["localImages"]) {
-    localImages = JSON.parse(localStorage["localImages"]);
-}
 
 function loadPhotos() {
 
@@ -203,10 +192,6 @@ function loadPhotos() {
         }
     }
 
-    // Add draggable class to photos
-    //$('.photo').addClass('draggable');
-    //console.log($('div.photo img'));
-
     // Fade out existing photos
     $('.photo').addClass('fade-out');
 
@@ -224,81 +209,54 @@ function loadPhotos() {
         // jQuery loop
         $.each(data.photos.photo, function(i, photo) {
             var imgURL = 'http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_n.jpg';
-            //console.log(i);
-            //console.log(imgURL);
 
             // Pre-cache image
             $('<img />').attr({'src': imgURL, 'data-image-num': i}).load(function() {
                 console.log('image loaded');
                 var imageDataNum = $(this).attr('data-image-num');
-                //$('#photo-' + imageDataNum).css('background-image', 'url(' + imgURL + ')').removeClass('fade-out').addClass('fade-in');
                 $('#photo-' + imageDataNum).append("<img class='draggable' id='img"+i+"' src='" + imgURL + "' >").removeClass('fade-out').addClass('fade-in');
             });
         });
 
         $('body').on("mousedown", function() {
 
-        var dragSourceElement;
+            var dragSourceElement;
 
-        $(".draggable").attr('draggable', 'true')
-            .bind('dragstart', function() {
-            dragSourceElement = this;
-                //console.log("HERE!" + this);
-            $(this).css({
-                'opacity': '0.5',
-                'box-shadow': '0px, 0px, 5px rgba(0, 0, 0, 1)'
+            $(".draggable").attr('draggable', 'true')
+                .bind('dragstart', function() {
+                dragSourceElement = this;
+                $(this).css({
+                    'opacity': '0.5',
+                    'box-shadow': '0px, 0px, 5px rgba(0, 0, 0, 1)'
+                });
+
+            }).bind('dragend', function() {
+                dragSourceElement = this;
+                $(this).css({
+                    'opacity': '1',
+                    'box-shadow': 'none'
+                });
             });
 
-        }).bind('dragend', function() {
-            dragSourceElement = this;
-            $(this).css({
-                'opacity': '1',
-                'box-shadow': 'none'
-            });
-        });
+            $('#target').each(function(){
+                $(this).bind('dragover', function(event) {
+                    imageID = $(this).attr('id');
+                    //alert(imageID);
+                    event.preventDefault();
+                });
 
-        $('#target').each(function(){
-            $(this).bind('dragover', function(event) {
-                imageID = $(this).attr('id');
-                //alert(imageID);
-                event.preventDefault();
+                $(this).bind('drop', function(event) {
+                    event.preventDefault();
+                    //$(dragSourceElement).hide();
+                    alert("Picture added to MyPhotoBook!");
+                    storagePhoto = dragSourceElement.getAttribute('src');
+                    //add image to array
+                    localImages.push(storagePhoto);
+                    console.log("Added photo to localstorage");
+                    //Save the array to local storage
+                    localStorage["localImages"] = JSON.stringify(localImages);
+                });
             });
-
-            $(this).bind('drop', function(event) {
-                event.preventDefault();
-                //$(dragSourceElement).hide();
-                //alert("Picture added to MyPhotoBook!");
-                //alert(dragSourceElement);
-                //alert(dragSourceElement.getAttribute('id'));
-                storagePhoto = dragSourceElement.getAttribute('src');
-                //imgData = getBase64Image(storagePhoto);
-                //add image to array
-                console.log(localImages);
-                localImages.push(storagePhoto);
-                console.log(localImages);
-                //Save the array to local storage
-                localStorage["localImages"] = JSON.stringify(localImages);
-                //localStorage.setItem("imgData", storagePhoto);
-                //console.log(storagePhoto);
-
-            });
-        });
         });
     });
 }
-
-/*function getBase64Image(img) {
-    // Create an empty canvas element
-    var canvas = document.createElement("canvas");
-    canvas.width = img.width;
-    canvas.height = img.height;
-
-    // Copy the image contents to the canvas
-    var ctx = canvas.getContext("2d");
-    ctx.drawImage(img, 0, 0);
-
-    // Get the data-URL formatted image
-    var dataURL = canvas.toDataURL("image/png");
-
-    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
-}*/
