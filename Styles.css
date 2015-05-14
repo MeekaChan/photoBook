@@ -1,5 +1,5 @@
 html {
-    background: url(http://mayang.com/textures/Wood/images/Flat%20Wood%20Textures/wooden_tabletop_1012121.JPG) no-repeat center center fixed;
+    background: url(Images/Background/wood_dark.jpg) no-repeat center center fixed;
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -10,41 +10,52 @@ body {
     height: 100%;
 }
 
+@font-face {
+    font-family: 'writtenNotes';
+    src: url('fonts/AlwaysForever.ttf');
+    src: url('fonts/AlwaysForever.otf');
+}
+
 /*BACKGROUND BUTTONS*/
 
 #background-styles {
     float: left;
+    height: 30px;
 }
 
 .background-button {
     height: 30px;
     width: 30px;
-    padding: 2px 2px;
+    border-width: 3px;
+    padding: 0px;
 }
 
 .background-button img {
     height: 28px;
     width: auto;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 /*SEARCHFORM*/
 
 #search-form {
-    width: 750px;
-    margin-top: 15px;
-    margin-left: auto;
-    margin-right: auto;
+    width: 50%;
+    margin: 15px auto 0px;
     float: none;
+    -moz-box-shadow: 5px 4px 30px -1px #000;
+    -webkit-box-shadow: 5px 4px 30px -1px #000;
+    box-shadow: 5px 4px 30px -1px #000;
 }
 
 #search-box {
     border: none;
-    border-bottom: 1px solid #999;
+    /*border-bottom: 1px solid #999;*/
     width: 100%;
-    font-family: "Helvetica Neue", Arial, sans-serif;
+    text-indent: 5px;
+    font-family: "writtenNotes", Arial, sans-serif;
+    font-weight: bold;
     color: #333333;
-    letter-spacing: -2px;
+    letter-spacing: 2px;
     font-size: 32pt;
 }
 

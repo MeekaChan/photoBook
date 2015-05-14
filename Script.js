@@ -21,7 +21,7 @@ $(document).ready(function() {
 
     /*BACKGROUND BUTTONS*/
     $("#table").click(function() {
-        $("html").css("background-image", "url(Images/Background/wooden_tabletop_1012121.JPG)").css("background-size", "cover");
+        $("html").css("background-image", "url(Images/Background/wood_dark.jpg)").css("background-size", "cover");
     });
 
     $("#concrete").click(function() {
@@ -29,11 +29,15 @@ $(document).ready(function() {
     });
 
     $("#grass").click(function() {
-        $("html").css("background-image", "url(Images/Background/depositphotos_3258821-Grass-background---golf-field.jpg)").css("background-size", "cover");
+        $("html").css("background-image", "url(Images/Background/a_grass_background.jpg)").css("background-size", "cover");
     });
 
-    $("#blank").click(function() {
+    $("#blank-salmon").click(function() {
         $("html").css("background", "#FFCDAA", "background-image", "url(none)").css("background-size", "cover");
+    });
+
+    $("#blank-green").click(function() {
+        $("html").css("background", "#B8E68A", "background-image", "url(none)").css("background-size", "cover");
     });
 
     /*INITIATE FLIPBOOK*/
