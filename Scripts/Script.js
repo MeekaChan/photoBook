@@ -48,11 +48,11 @@ $(document).ready(function() {
         autoCenter: true
     });
 
-    $("#my_photo_book").turn({
+    /*$("#my_photo_book").turn({
         width: 800,
         height: 567,
         autoCenter: true
-    });
+    });*/
 
     console.log("Flipbook created")
 
