@@ -64,26 +64,10 @@ $(document).ready(function() {
 
     console.log("Photo container added")
 
-    /*----------------------Two of the same??------------------------*/
     // Add empty photo <divs>
     for (var i = 0; i < 3; i++) {
         $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + pageNumber);
     }
-
-    // Add empty photo <divs>
-    for (var i = 0; i < 10; i++) {
-        if (i<3){
-            $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-1');
-        }
-        else if (i<6 && i>2){
-            $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-2');
-        }
-        else if (i<10 && i>5){
-            $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-3');
-        }
-    }
-
-    /*----------------------Two of the same??------------------------*/
 
     console.log("Empty photo <div>s added");
 
@@ -93,8 +77,8 @@ $(document).ready(function() {
     navLeftButton.addClass('fade-out');
     navRightButton.addClass('fade-out');
 
-    // Handle submit event
-    $('#search-form').submit(function(e) {
+    // Handle submit e by pressing 'enter'
+    $("#search-form").submit(function(e) {
 
         console.log('form submitted');
 
@@ -125,6 +109,14 @@ $(document).ready(function() {
         $("#flipbook").turn("next");
     });
 
+    // Handle submit event by clicking the search button
+    $("#search_button").click(function(e) {
+
+        // Stop the page from reloading
+        e.preventDefault();
+        $("#search-form").submit();
+    });
+
     // Next button click
     $('.nav-right').click(function() {
         //var currentPage = $("#flipbook").turn('page');
@@ -145,7 +137,6 @@ $(document).ready(function() {
         // 3) Make the different photo-# unique - aka do not change when loadPhotos()-function is called.
         $("#flipbook").turn("next");
 
-        /*----------------------Maybe not load pictures again??------------------------*/
         loadPhotos();
     });
 
@@ -153,7 +144,6 @@ $(document).ready(function() {
     $('.nav-left').click(function() {
         if (pageNumber > 1)
             pageNumber--;
-        /*----------------------Maybe not load pictures again??------------------------*/
         loadPhotos();
         $("#flipbook").turn("previous");
     });

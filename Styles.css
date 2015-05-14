@@ -16,6 +16,12 @@ body {
     src: url('fonts/AlwaysForever.otf');
 }
 
+@font-face {
+    font-family: 'photobookTitle';
+    src: url('fonts/Sketch_Block.ttf');
+    src: url('fonts/Sketch_Block.otf');
+}
+
 /*BACKGROUND BUTTONS*/
 
 #background-styles {
@@ -57,6 +63,16 @@ body {
     color: #333333;
     letter-spacing: 2px;
     font-size: 32pt;
+}
+
+/*LOGO*/
+#logo {
+    font-family: photobookTitle;
+    font-size: 32px;
+    float: right;
+    color: white;
+    text-shadow: 3px 4px #000;
+    margin: 15px 15px 0px 0px;
 }
 
 /*FLIPBOOK*/
@@ -201,4 +217,49 @@ body {
 .nav-right {
     right: 15px;
     background-image: url('Images/right_arrow.png');
+}
+
+
+
+
+
+
+
+#search_button{
+    height:50px;
+    width:50px;
+    border-radius: 6px;
+    border:1 px solid black;
+    color:white !important;
+    font-family:Roboto;
+    font-weight:300;
+    font-size:20px;
+    float:right;
+    outline:0;
+    background-color: black;
+    margin-right: 10%;
+    position: relative;
+    margin-top: 7%;
+    padding:0 !important;
+}
+
+.hard, .pages{
+    background-color:#FFFFEB;
+}
+
+#titleLabel{
+    height:40px;
+    width:150px;
+    background-color:#FFFFEB;
+    position:absolute;
+    bottom: -20%;
+    width: 157px;
+    right: 2%;
+    border-radius: 4px;
+
+}
+
+#label_text{
+    text-align:center;
+    margin-top:7%;
 }
