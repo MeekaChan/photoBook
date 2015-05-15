@@ -128,7 +128,7 @@ body {
 .bookMessage {
     font-family: "writtenNotes", Arial, sans-serif;
     width: 80%;
-    margin: 15% auto;
+    margin: -9% auto;
 }
 
 .bookMessage h1 {
@@ -155,26 +155,52 @@ body {
     overflow: hidden;
 }
 
-#photo-container-1, #photo-container-2, #photo-container-3 {
+[id*="#photo-container-"] {
     width:400px;
 }
 
-.photo {
+/* .photo {
     width: 330px;
     height: 182px;
     margin-bottom: 5px;
     margin-left: 5px;
-    /*background-size: cover;
-    background-position: center center;*/
+    background-size: cover;
+    background-position: center center;
     margin-top: 5px;
+} */
+
+.photo {
+  background: #f4f4f4;
+  width: 175px;
+  height: 165px;
+  overflow: hidden;
+  border: 5px solid #f4f4f4;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  box-shadow: 0px 2px 2px 0px rgba(0,0,0,.3);
+  margin-right: 10px;
+}
+/* Even pictures on each page float to the right*/
+.photo:nth-child(even) {float: right;}
+
+/* Odd pictures on each page float to the left*/
+.photo:nth-child(odd) {float: left;}
+
+/*Put margin on the pages to the left*/
+.even .photo:nth-child(odd) {
+  margin-left: 5px;
 }
 
-.even .photo {
-    margin-left: 55px;
-}
-
+/*Old code. Remove?*/
 #photo-container .photo:not(:nth-child(3n)) {
     margin-right: 5px;
+}
+
+/*Attempt to frame pictures of different sizes better. If not for this, then they are not so centered.*/
+.photo .draggable {
+  position: relative;
+  left:-20%;
+  top: -20%;
 }
 
 .hard, .pages{
