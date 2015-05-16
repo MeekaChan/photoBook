@@ -60,14 +60,18 @@ $(document).ready(function() {
     pageNumber = 1;
 
     //Add a photo container to the first page:
-    $('.pages').append("<div id='photo-container-" + pageNumber + "'></div>");
+   // $('.pages').append("<div id='photo-container-" + pageNumber + "'></div>");
 
     console.log("Photo container added")
 
-    // Add empty photo <divs>
-    for (var i = 0; i < 3; i++) {
-        $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + pageNumber);
-    }
+    //Add empty photo <divs>
+    //var containerNumber = 1;
+    //for (var i = 0; i < 61; i++) {
+    //    if(i % 6 == 0){
+    //            containerNumber++;
+    //        }
+    //   $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + containerNumber);
+    //}
 
     console.log("Empty photo <div>s added");
 
@@ -119,26 +123,15 @@ $(document).ready(function() {
 
     // Next button click
     $('.nav-right').click(function() {
-        //var currentPage = $("#flipbook").turn('page');
-        pageNumber++;
-
-        newContainerOdd = $("<div />");
-        $("#flipbook").turn("addPage", newContainerOdd, (pageNumber+4));
-        // $('<div />', {"id": "photo-container-" + (pageNumber + 4)}).appendTo('.p' + (pageNumber+4));
-
-        //Create a photo container on the current page:
-        //$(currentPage).append("<div id='photo-container-" + pageNumber + "'></div>");
-
-        for (var i = 4; i < 7; i++) {
-            $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + pageNumber);
-        }
-        // 1) Find a way to dynamically assign the correct numbers to the photos inside the photo-containers (AND THE PHOTOCONTAINERS ALSO)
-        // 2) Create two pages at a time (since two are displayed at the same time in the book)
-        // 3) Make the different photo-# unique - aka do not change when loadPhotos()-function is called.
+    
         $("#flipbook").turn("next");
-
         loadPhotos();
     });
+
+//Load photos when clicking/dragging corners (loads 24 pictures at a time)
+     $("#flipbook").bind("turning", function(click, page, view) {
+        loadPhotos();
+});   
 
     // Prev button click
     $('.nav-left').click(function() {
@@ -197,11 +190,11 @@ function loadPhotos() {
         'api_key': '229833ad396e499afb4c9939fa3f40b6',
         'tags': searchTerms,
         'page': pageNumber,
-        'per_page': '3',
+        'per_page': '60',
         'format': 'json'
     }, function(data) {
         console.log(data);
-
+        console.log("Images loaded: " + data.photos.total);
         // jQuery loop
         $.each(data.photos.photo, function(i, photo) {
             var imgURL = 'http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_n.jpg';
@@ -211,8 +204,11 @@ function loadPhotos() {
                 console.log('image loaded');
                 var imageDataNum = $(this).attr('data-image-num');
                 $('#photo-' + imageDataNum).append("<img class='draggable' id='img"+i+"' src='" + imgURL + "' >").removeClass('fade-out').addClass('fade-in');
+
             });
         });
+
+
 
         $('body').on("mousedown", function() {
 
