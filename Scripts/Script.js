@@ -18,6 +18,7 @@ if (localStorage["localImages"]) {
 $(document).ready(function() {
 
     //localStorage.clear();
+    $('#my_photo_book').hide();
 
     /*BACKGROUND BUTTONS*/
     $("#table").click(function() {
@@ -38,6 +39,29 @@ $(document).ready(function() {
 
     $("#blank-green").click(function() {
         $("html").css("background", "#B8E68A", "background-image", "url(none)").css("background-size", "cover");
+    });
+
+    $('#target').click(function(e) {
+        e.preventDefault();
+        //var photoalbum = '.photo_album';
+        //$('#flipbook').hide();
+
+        //$('#my_photo_book').show();
+        console.log("test");
+        if ($('#flipbook').is(':hidden')){
+         $('#flipbook').show(500);
+         } else {
+            $('#flipbook').hide(500);
+         }
+        if ($('#my_photo_book').is(':hidden')){
+            $('#my_photo_book').show(500);
+        } else {
+            $('#my_photo_book').hide(500);
+        }
+
+         /*if ($('#flipbook').is(':visible')){
+         $('.photo_album').hide();
+         }*/
     });
 
     /*INITIATE FLIPBOOK*/
@@ -131,7 +155,7 @@ $(document).ready(function() {
 //Load photos when clicking/dragging corners (loads 24 pictures at a time)
      $("#flipbook").bind("turning", function(click, page, view) {
         loadPhotos();
-});   
+     });
 
     // Prev button click
     $('.nav-left').click(function() {
@@ -194,7 +218,7 @@ function loadPhotos() {
         'format': 'json'
     }, function(data) {
         console.log(data);
-        console.log("Images loaded: " + data.photos.total);
+        //console.log("Images loaded: " + data.photos.total);
         // jQuery loop
         $.each(data.photos.photo, function(i, photo) {
             var imgURL = 'http://farm' + photo.farm + '.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_n.jpg';
