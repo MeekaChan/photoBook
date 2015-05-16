@@ -48,11 +48,11 @@ $(document).ready(function() {
         autoCenter: true
     });
 
-    /*$("#my_photo_book").turn({
+    $("#my_photo_book").turn({
         width: 800,
         height: 567,
         autoCenter: true
-    });*/
+    });
 
     console.log("Flipbook created")
 
@@ -153,10 +153,12 @@ $(document).ready(function() {
         console.log(storedImages);
         var photoString = "";
         for (i = 0; i < storedImages.length; i++) {
-            photoString+="<img src='"+storedImages[i]+"'>";
+            photoString="<img src='"+storedImages[i]+"'>";
+            console.log($('#storagePic_'+i));
+            $('#storagePic_'+i).append(photoString);
         }
         console.log(photoString);
-        $('#storagePic').append(photoString);
+        //$('#storagePic').append(photoString);
     } else {
         console.log("No stored images");
     }
@@ -243,6 +245,7 @@ function loadPhotos() {
                     event.preventDefault();
                     //$(dragSourceElement).hide();
                     alert("Picture added to MyPhotoBook!");
+                    console.log("test");
                     storagePhoto = dragSourceElement.getAttribute('src');
                     //add image to array
                     localImages.push(storagePhoto);

@@ -51,6 +51,7 @@ body {
     -moz-box-shadow: 5px 4px 30px -1px #000;
     -webkit-box-shadow: 5px 4px 30px -1px #000;
     box-shadow: 5px 4px 30px -1px #000;
+    position: relative;
 }
 
 #search-box {
@@ -74,12 +75,13 @@ body {
     font-family: Roboto, Arial, sans-serif;
     font-weight: 300;
     font-size: 20px;
-    float: right;
+    /* float: right; */
     outline: 0;
     background-color: #746767;
-    margin-left: 46.35%;
+    /* margin-left: 46.35%; */
     position: absolute;
-    margin-top: -2.68%;
+    top: 1.5px;
+    right: 2.5px;
     padding: 0 !important;
 }
 
@@ -100,9 +102,11 @@ body {
 /*FLIPBOOK*/
 
 .photo_album{
-    margin:30px auto;
-    width:800px;
-    height:700px;
+    width: 800px;
+    height: 700px;
+    position: absolute;
+    left: 50%;
+    margin-left: -400px;
 }
 /*
 #flipbook{
@@ -184,40 +188,52 @@ body {
 /*MYPHOTOBOOK*/
 
 #my_photo_book_target {
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    z-index: 999;
+}
+
+#my_photo_book_target a {
     /*position: absolute;
     float: right;
     margin-top: 10px;*/
+    display: block;
 }
 
 #my_photo_book_target img {
     width: 200px;
     height: auto;
-    position: absolute;
-    margin-left: 1290px;
-    margin-top: -230px;
-    float: right;
-    margin-bottom: 0px;
-}
+    /* position: fixed; */
+    /* right: 15px; */
+    /* bottom: 15px; */
+    /* margin-left: 1290px; */
+    /* margin-top: -230px; */
+    /* float: right; */
+    /* margin-bottom: 0px; */
+    /* z-index: 99;*/
+  }
 
-#titleLabel{
+#titleLabel {
     height: 40px;
     background-color: #FFFFEB;
     position: absolute;
-    bottom: 130px;
-    left: 1322px;
+    bottom: 105px;
+    right: 11px;
     /* top: 0%; */
     width: 157px;
-    float: right;
+    /* float: right; */
     /* right: 1%; */
     border-radius: 2px;
+    /* z-index: 99; */
 }
 
 #label_text{
-    text-align: center;
-    margin-top: 7%;
-    font-size: 19px;
-    color: black;
-    font-family: "photobookTitle", Arial, sans-serif;
+  text-align: center;
+  margin-top: 7%;
+  font-size: 19px;
+  color: black;
+  font-family: "photobookTitle", Arial, sans-serif;
 }
 
 /*DRAG'N'DROP*/
