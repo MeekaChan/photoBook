@@ -44,4 +44,4 @@ Temporary Items
 .idea
 mv.exe*
 grep.exe*
-workspace.xml
+.idea/workspace.xml
