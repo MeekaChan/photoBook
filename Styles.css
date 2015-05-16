@@ -126,15 +126,13 @@ body {
 #flipbook.shadow{
     -webkit-box-shadow: 0 4px 10px #000;
     -moz-box-shadow: 0 4px 10px #000;
-    -ms-box-shadow: 0 4px 10px #000;
-    -o-box-shadow: 0 4px 10px #000;
     box-shadow: 0 4px 10px #000;
 }
 
 .bookMessage {
     font-family: "writtenNotes", Arial, sans-serif;
     width: 80%;
-    margin: -9% auto;
+    margin: 9% auto;
 }
 
 .bookMessage h1 {
@@ -161,6 +159,7 @@ body {
     overflow: hidden;
 }
 
+/*WHAT IS THIS*/
 [id*="#photo-container-"] {
     width:400px;
 }
@@ -210,22 +209,31 @@ body {
 }
 
 .hard, .pages{
-    background-color:#FFFFEB;
+    background-color:#f7f7f7;
 }
 
 /*MYPHOTOBOOK*/
 
+#myBackCover {
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
 #my_photo_book_target {
     position: fixed;
-    bottom: 15px;
-    right: 15px;
+    bottom: 25px;
+    right: 25px;
     z-index: 999;
     display: block;
 }
 
 #my_photo_book_target img {
-    width: 200px;
-    height: auto;
+    height: 190px;
+    width: auto;
+    -webkit-box-shadow: 0 4px 10px #000;
+    -moz-box-shadow: 0 4px 10px #000;
+    box-shadow: 0 4px 10px #000;
     /* position: fixed; */
     /* right: 15px; */
     /* bottom: 15px; */
@@ -248,12 +256,28 @@ body {
     /* right: 1%; */
     border-radius: 2px;
     /* z-index: 99; */
+    font-size: 19px;
 }
 
-#label_text{
+#bigTitleLabel {
+    height: 80px;
+    background-color: #FFFFEB;
+    position: absolute;
+    /* bottom: 105px; */
+    top: 200px;
+    right: 15px;
+    /* top: 0%; */
+    width: 300px;
+    /* float: right; */
+    /* right: 1%; */
+    border-radius: 7px;
+    /* z-index: 99; */
+    font-size: 36px;
+}
+
+.label_text{
   text-align: center;
   margin-top: 7%;
-  font-size: 19px;
   color: black;
   font-family: "photobookTitle", Arial, sans-serif;
 }
@@ -264,19 +288,19 @@ body {
     cursor: move;
 }
 
-#storagePic {
+/*#storagePic {
     height: 100px;
-    wifth: 100px;
-}
+    width: 100px;
+}*/
 
 /*TURN JS-STYLES*/
-.hard {
-    background: #f4f4f4;
+/*.hard {
+    background: #f7f7f7;
 }
 
 .pages {
     background: #f7f7f7;
-}
+}*/
 
 /*LATER FOR FADE ANIMATIONS*/
 @-webkit-keyframes 'fade-in' {
@@ -315,18 +339,21 @@ body {
     width: 60px;
     height: 60px;
     position: absolute;
-    top: 350px;
+    /*top: 350px;*/
     cursor: pointer;
     opacity: 0;
     visibility: hidden;
+    top: 50%;
 }
 
 .nav-left {
-    left: 15px;
+    left: -15%;
+    /*top: 50%;*/
     background-image: url('Images/left_arrow.png');
 }
 
 .nav-right {
-    right: 15px;
+    right: -15%;
+    /*top: 50%;*/
     background-image: url('Images/right_arrow.png');
 }

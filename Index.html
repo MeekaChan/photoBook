@@ -16,17 +16,17 @@
         <header id="page-top">
             <!--BACKGROUND BUTTONS-->
             <div id="background-styles">
-                <button id="table" class="background-button"><img src="Images/Background/wood_dark-thumbnail.jpg"></button>
-                <button id="concrete" class="background-button"><img src="Images/Background/wildtextures-concrete-wall-background-thumbnail.jpg"></button>
-                <button id="grass" class="background-button"><img src="Images/Background/a_grass_background-thumbnail.jpg"></button>
-                <button id="blank-salmon" class="background-button"><img src="Images/Background/salmon-backdrop-thumbnail.jpg"></button>
-                <button id="blank-green" class="background-button"><img src="Images/Background/green-backdrop-thumbnail.jpg"></button>
+                <button id="table" class="background-button hvr-shrink"><img src="Images/Background/wood_dark-thumbnail.jpg"></button>
+                <button id="concrete" class="background-button hvr-shrink"><img src="Images/Background/wildtextures-concrete-wall-background-thumbnail.jpg"></button>
+                <button id="grass" class="background-button hvr-shrink"><img src="Images/Background/a_grass_background-thumbnail.jpg"></button>
+                <button id="blank-salmon" class="background-button hvr-shrink"><img src="Images/Background/salmon-backdrop-thumbnail.jpg"></button>
+                <button id="blank-green" class="background-button hvr-shrink"><img src="Images/Background/green-backdrop-thumbnail.jpg"></button>
             </div>
             <!--SEARCH FORM-->
             <form id="search-form" method="post" action="#">
                 <input id="search-box" type="text">
                 <!--BUTTON TEST-->
-                <button type="button" id="search_button"><i class="fa fa-search"></i></button>
+                <button type="button" class="hvr-reveal" id="search_button"><i class="fa fa-search"></i></button>
             </form>
             <!--LOGO-->
             <div id="logo"><p>photoBook</p></div>
@@ -34,7 +34,7 @@
 
         <div class="photo_album">
             <div id="flipbook">
-                <div class="hard" id="cover"><img src="../photoBook/Images/PhotoAlbum/redBook_front.jpg" style="width: 420px; height: auto; margin:0px auto;"/ ></div>
+                <div class="hard" id="cover"><img src="../photoBook/Images/PhotoAlbum/redBook_front.jpg" style="width: 420px; height: auto; margin:0 auto;"></div>
                 <div class="hard">
                     <div class="bookMessage">
                     <h1>Welcome to photoBook!</h1>
@@ -153,43 +153,45 @@
                         <h2>We hope you enjoyed it, and to see you soon</h2>
                     </div>
                 </div>
-                <div class="hard" id="cover"><img src="../photoBook/Images/PhotoAlbum/redBook_back.jpg" style="width: 420px; height: auto; margin:0px auto;"/ ></div>
+                <div class="hard" id="cover"><img src="../photoBook/Images/PhotoAlbum/redBook_back.jpg" style="width: 420px; height: auto; margin:0 auto;" ></div>
+
             </div>
+            <div class="nav-button nav-left hvr-skew-backward flip-arrow flip-arrow-left"></div>
+            <div class="nav-button nav-right hvr-skew-forward flip-arrow flip-arrow-right"></div>
         </div>
 
         <div id="my_photo_book_target">
-            <div class="hvr-bob changeBook"><img id="target" src="Images/MyphotoBook/Myphotobook.jpg">
-                <div id="titleLabel"><p id="label_text">My photoBook</p></div>
+            <div class="hvr-grow-rotate"><img id="target" src="Images/MyphotoBook/Myphotobook.jpg">
+                <div id="titleLabel"><p class="label_text">My photoBook</p></div>
             </div>
         </div>
 
-        <div class="nav-button nav-left hvr-skew-backward"></div>
-        <div class="nav-button nav-right hvr-skew-forward"></div>
+
 
         <div class="photo_album">
-            <div id="my_photo_book">
-                <div class="hard" id="cover"><img src="../photoBook/Images/PhotoAlbum/redBook_front.jpg" style="width: 420px; height: auto; margin:0px auto;"/ ></div>
+            <div id="my_photo_book" >
                 <div class="hard">
+                    <img src="../photoBook/Images/MyphotoBook/Myphotobook.jpg" style="width:auto; height:567px;">
+                    <div id="bigTitleLabel">
+                        <p class="label_text">My photoBook</p>
+                    </div>
+                </div>
+                <div class="hard"></div>
+                <div class="pages">
                     <div id="storagePic_0" style="background-color: aqua"></div>
                     <div id="storagePic_1" style="background-color: mistyrose"></div>
                 </div>
-                <div class="pages">
-                    <div id="photo-1">
-
-                    </div>
-                </div>
-                <div class="pages">
-                    <div id="photo-2"></div>
-                </div>
+                <div class="pages"></div>
+                <div class="pages"></div>
+                <div class="hard"></div>
+                <div class="hard"></div>
                 <div class="hard">
-                    <div id="photo-3"></div>
+                    <img id="myBackCover" src="../photoBook/Images/MyphotoBook/Myphotobook.jpg" style="width:auto; height:567px;">
                 </div>
-                <div class="hard" id="cover"><img src="../photoBook/Images/PhotoAlbum/redBook_back.jpg" style="width: 420px; height: auto; margin:0px auto;"/ ></div>
             </div>
+            <div class="nav-button nav-left hvr-skew-backward my-arrow my-arrow-left"></div>
+            <div class="nav-button nav-right hvr-skew-forward my-arrow my-arrow-right"></div>
         </div>
-
-        <div class="nav-button nav-left"></div>
-        <div class="nav-button nav-right"></div>
 
     </body>
 </html>

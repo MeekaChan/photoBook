@@ -19,6 +19,7 @@ $(document).ready(function() {
 
     //localStorage.clear();
     $('#my_photo_book').hide();
+    $('.my-arrow').hide();
 
     /*BACKGROUND BUTTONS*/
     $("#table").click(function() {
@@ -43,25 +44,28 @@ $(document).ready(function() {
 
     $('#target').click(function(e) {
         e.preventDefault();
-        //var photoalbum = '.photo_album';
-        //$('#flipbook').hide();
-
-        //$('#my_photo_book').show();
-        console.log("test");
         if ($('#flipbook').is(':hidden')){
-         $('#flipbook').show(500);
-         } else {
-            $('#flipbook').hide(500);
-         }
-        if ($('#my_photo_book').is(':hidden')){
-            $('#my_photo_book').show(500);
+            $('#flipbook').show('slow');
+            $(this).attr('src',"Images/MyphotoBook/Myphotobook.jpg");
+            $('#titleLabel').show();
+            $('.my-arrow').hide();
+            $('.flip-arrow').show();
         } else {
-            $('#my_photo_book').hide(500);
+            $('#flipbook').hide('slow');
+            $('.my-arrow').show();
+            $('.flip-arrow').hide();
         }
-
-         /*if ($('#flipbook').is(':visible')){
-         $('.photo_album').hide();
-         }*/
+        if ($('#my_photo_book').is(':hidden')){
+            $('#my_photo_book').show('slow');
+            $(this).attr('src',"Images/MyphotoBook/redBook.jpg");
+            $('#titleLabel').hide();
+            $('.my-arrow').show();
+            $('.flip-arrow').hide();
+        } else {
+            $('#my_photo_book').hide('slow');
+            $('.my-arrow').hide();
+            $('.flip-arrow').show();
+        }
     });
 
     /*INITIATE FLIPBOOK*/
@@ -80,11 +84,10 @@ $(document).ready(function() {
 
     console.log("Flipbook created")
 
-    // Set pageNumber to 1
-    pageNumber = 1;
+
 
     //Add a photo container to the first page:
-   // $('.pages').append("<div id='photo-container-" + pageNumber + "'></div>");
+    // $('.pages').append("<div id='photo-container-" + pageNumber + "'></div>");
 
     console.log("Photo container added")
 
@@ -110,8 +113,17 @@ $(document).ready(function() {
 
         console.log('form submitted');
 
+        // Set pageNumber to 1
+        pageNumber = 1;
+
         // Stop the page from reloading
         e.preventDefault();
+
+        // Make the flipbook appear when new search is commenced
+        if ($('#flipbook').is(':hidden')) {
+            $('#flipbook').show('slow');
+            $('#my_photo_book').hide('slow');
+        }
 
         // Remove the 'visibility: hidden' CSS property
         // is executing for the first time
@@ -133,8 +145,8 @@ $(document).ready(function() {
 
         loadPhotos();
 
-        //Open photo album
-        $("#flipbook").turn("next");
+        //Open photo album to correct page
+        $("#flipbook").turn("page", 3);
     });
 
     // Handle submit event by clicking the search button
@@ -145,24 +157,41 @@ $(document).ready(function() {
         $("#search-form").submit();
     });
 
-    // Next button click
-    $('.nav-right').click(function() {
-    
+    // Next flip button click
+    $('.flip-arrow-right').click(function() {
+        pageNumber++;
         $("#flipbook").turn("next");
         loadPhotos();
     });
 
-//Load photos when clicking/dragging corners (loads 24 pictures at a time)
+    // Next my button click
+    $('.my-arrow-right').click(function() {
+        pageNumber++;
+        $("#my_photo_book").turn("next");
+        loadPhotos();
+    });
+
+    //Load photos when clicking/dragging corners (loads 24 pictures at a time)
      $("#flipbook").bind("turning", function(click, page, view) {
         loadPhotos();
+         pageNumber++;
      });
 
-    // Prev button click
-    $('.nav-left').click(function() {
+    // Prev flip button click
+    $('.flip-arrow-left').click(function() {
+        if (pageNumber > 1)
+            pageNumber--;
+        console.log(pageNumber);
+        loadPhotos();
+        $("#flipbook").turn("previous");
+    });
+
+    // Prev my button click
+    $('.my-arrow-left').click(function() {
         if (pageNumber > 1)
             pageNumber--;
         loadPhotos();
-        $("#flipbook").turn("previous");
+        $("#my_photo_book").turn("previous");
     });
 
     if (localStorage["localImages"]) {
@@ -171,8 +200,8 @@ $(document).ready(function() {
         var photoString = "";
         for (i = 0; i < storedImages.length; i++) {
             photoString="<img src='"+storedImages[i]+"'>";
-            console.log($('#storagePic_'+i));
-            $('#storagePic_'+i).append(photoString);
+            console.log($('#storagePic_' + i));
+            $('#storagePic_' + i).append(photoString);
         }
         console.log(photoString);
         //$('#storagePic').append(photoString);
@@ -231,8 +260,6 @@ function loadPhotos() {
 
             });
         });
-
-
 
         $('body').on("mousedown", function() {
 
