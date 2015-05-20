@@ -82,23 +82,21 @@ $(document).ready(function() {
         autoCenter: true
     });
 
-    console.log("Flipbook created")
-
-
+    console.log("Flipbooks created")
 
     //Add a photo container to the first page:
     // $('.pages').append("<div id='photo-container-" + pageNumber + "'></div>");
 
-    console.log("Photo container added")
+    //console.log("Photo container added")
 
     //Add empty photo <divs>
-    //var containerNumber = 1;
-    //for (var i = 0; i < 61; i++) {
-    //    if(i % 6 == 0){
-    //            containerNumber++;
-    //        }
-    //   $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + containerNumber);
-    //}
+    /*var containerNumber = 1;
+    for (var i = 0; i < 61; i++) {
+        if(i % 6 == 0){
+                containerNumber++;
+            }
+       $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + containerNumber);
+    }*/
 
     console.log("Empty photo <div>s added");
 
@@ -195,15 +193,16 @@ $(document).ready(function() {
     });
 
     if (localStorage["localImages"]) {
+        console.log(localStorage["localImages"].length);
         var storedImages = JSON.parse(localStorage["localImages"]);
         console.log(storedImages);
         var photoString = "";
         for (i = 0; i < storedImages.length; i++) {
             photoString="<img src='"+storedImages[i]+"'>";
-            console.log($('#storagePic_' + i));
+            //console.log($('#storagePic_' + i));
             $('#storagePic_' + i).append(photoString);
         }
-        console.log(photoString);
+        //console.log(photoString);
         //$('#storagePic').append(photoString);
     } else {
         console.log("No stored images");
@@ -299,6 +298,7 @@ function loadPhotos() {
                     console.log("Added photo to localstorage");
                     //Save the array to local storage
                     localStorage["localImages"] = JSON.stringify(localImages);
+                    console.log("String parsed");
                 });
             });
         });
