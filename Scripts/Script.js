@@ -4,8 +4,8 @@
 
 // Global variables - need to keep state within the Web App
 var searchTerms;
-var pageNumber;
 
+//var pageNumber;
 var navLeftButton;
 var navRightButton;
 
@@ -43,17 +43,20 @@ $(document).ready(function() {
     });
 
     $('#target').click(function(e) {
+
         e.preventDefault();
         if ($('#flipbook').is(':hidden')){
+            /* Test */
             $('#flipbook').show('slow');
             $(this).attr('src',"Images/MyphotoBook/Myphotobook.jpg");
             $('#titleLabel').show();
             $('.my-arrow').hide();
             $('.flip-arrow').show();
+            $(".red").css({"z-index": "1"});
         } else {
             $('#flipbook').hide('slow');
             $('.my-arrow').show();
-            $('.flip-arrow').hide();
+            $(".red").css({"z-index": "0"});
         }
         if ($('#my_photo_book').is(':hidden')){
             $('#my_photo_book').show('slow');
@@ -61,12 +64,31 @@ $(document).ready(function() {
             $('#titleLabel').hide();
             $('.my-arrow').show();
             $('.flip-arrow').hide();
+            $(".brown").css({"z-index": "1"});
         } else {
             $('#my_photo_book').hide('slow');
             $('.my-arrow').hide();
             $('.flip-arrow').show();
+            $(".brown").css({"z-index": "0"});
         }
     });
+
+
+    
+    navLeftButton = $('.nav-left');
+    navRightButton = $('.nav-right');
+
+    //Only make keyframe animation no buttons once:
+    navLeftButton.addClass('l_buttonAnimation');
+    navRightButton.addClass('r_buttonAnimation');
+
+    navLeftButton.removeClass('l_buttonAnimation');
+    navRightButton.removeClass('r_buttonAnimation');
+
+
+    
+
+
 
     /*INITIATE FLIPBOOK*/
 
@@ -82,7 +104,9 @@ $(document).ready(function() {
         autoCenter: true
     });
 
-    console.log("Flipbooks created")
+    console.log("Flipbook created")
+
+    loadPhotos();
 
     //Add a photo container to the first page:
     // $('.pages').append("<div id='photo-container-" + pageNumber + "'></div>");
@@ -90,29 +114,25 @@ $(document).ready(function() {
     //console.log("Photo container added")
 
     //Add empty photo <divs>
-    /*var containerNumber = 1;
-    for (var i = 0; i < 61; i++) {
-        if(i % 6 == 0){
-                containerNumber++;
-            }
-       $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + containerNumber);
-    }*/
+    //var containerNumber = 1;
+    //for (var i = 0; i < 61; i++) {
+    //    if(i % 6 == 0){
+    //            containerNumber++;
+    //        }
+    //   $('<div />').attr('id', 'photo-' + i).addClass('photo').appendTo('#photo-container-' + containerNumber);
+    //}
 
-    console.log("Empty photo <div>s added");
-
-    navLeftButton = $('.nav-left');
-    navRightButton = $('.nav-right');
-
-    navLeftButton.addClass('fade-out');
-    navRightButton.addClass('fade-out');
+    //console.log("Empty photo <div>s added");
+  
+    
 
     // Handle submit e by pressing 'enter'
     $("#search-form").submit(function(e) {
 
         console.log('form submitted');
 
-        // Set pageNumber to 1
-        pageNumber = 1;
+        //Set pageNumber to 1
+       // pageNumber = 1;
 
         // Stop the page from reloading
         e.preventDefault();
@@ -121,129 +141,202 @@ $(document).ready(function() {
         if ($('#flipbook').is(':hidden')) {
             $('#flipbook').show('slow');
             $('#my_photo_book').hide('slow');
+            $("#titleLabel").show();
+            $("#target").attr('src',"Images/MyphotoBook/myphotobook.jpg");
         }
 
         // Remove the 'visibility: hidden' CSS property
         // is executing for the first time
+
+        /*
         if ($('.nav-button').css('visibility') == 'hidden') {
             $('.nav-button').css('visibility', 'visible');
         }
 
-        // Fade out nav buttons (as required)
-        if (navLeftButton.hasClass('fade-in')) {
-            navLeftButton.removeClass('fade-in').addClass('fade-out');
-        }
-        if (navRightButton.hasClass('fade-in')) {
-            navRightButton.removeClass('fade-in').addClass('fade-out');
-        }
-
+        */
+        /* BRIEFLY COMMENT OUT:
+         // Fade out nav buttons (as required)
+         if (navLeftButton.hasClass('fade-in')) {
+         navLeftButton.removeClass('fade-in').addClass('fade-out');
+         }
+         if (navRightButton.hasClass('fade-in')) {
+         navRightButton.removeClass('fade-in').addClass('fade-out');
+         }
+         */
         // Get search terms
         searchTerms = $('#search-box').val();
         console.log(searchTerms);
 
         loadPhotos();
 
+        $(".red").css({"z-index": "1"});
+        $(".brown").css({"z-index": "0"});
+
         //Open photo album to correct page
         $("#flipbook").turn("page", 3);
+
+        //Load new photos on new search:
+        $( "#search-box" ).keypress(function() {
+            $("#flipbook").turn("page", 1);
+        });
     });
 
     // Handle submit event by clicking the search button
-    $("#search_button").click(function(e) {
-
-        // Stop the page from reloading
-        e.preventDefault();
+    $("#search_button").click(function() {
         $("#search-form").submit();
     });
 
     // Next flip button click
     $('.flip-arrow-right').click(function() {
-        pageNumber++;
+        // pageNumber++;
         $("#flipbook").turn("next");
         loadPhotos();
+
     });
 
     // Next my button click
     $('.my-arrow-right').click(function() {
-        pageNumber++;
+        /*Comment his out for now. Otherwise it decrements the page two times */
+        //pageNumber++;
         $("#my_photo_book").turn("next");
         loadPhotos();
     });
 
+
     //Load photos when clicking/dragging corners (loads 24 pictures at a time)
-     $("#flipbook").bind("turning", function(click, page, view) {
+    $("#flipbook").bind("turning", function(click, page, view) {
         loadPhotos();
-         pageNumber++;
-     });
+     /*   
+        if(page == 1){
+            navLeftButton.removeClass('fade-in').addClass('fade-out');
+        }
+        */
+    });
+
+    //For my photobook
+    $("#my_photo_book").bind("turning", function(click, page, view) {
+        myPhotoImages();
+     /*   
+        if(page == 1){
+            navLeftButton.removeClass('fade-in').addClass('fade-out');
+        }
+        */
+    });
 
     // Prev flip button click
     $('.flip-arrow-left').click(function() {
-        if (pageNumber > 1)
-            pageNumber--;
-        console.log(pageNumber);
-        loadPhotos();
-        $("#flipbook").turn("previous");
-    });
+            //if (pageNumber >= 1){
+            //pageNumber--;
+            loadPhotos();
+            $("#flipbook").turn("previous");
+        }
+    );
 
     // Prev my button click
     $('.my-arrow-left').click(function() {
-        if (pageNumber > 1)
-            pageNumber--;
+        // if (pageNumber > 1)
+        /*Comment his out for now. Otherwise it decrements the page two times */
+        //  pageNumber--;
         loadPhotos();
         $("#my_photo_book").turn("previous");
     });
 
+
+    //Hover-over effect for search button: 
+    $("#search_button, #clear").hover(function() {
+            $(this).css("background-color", "#9E9595");
+        },
+
+        function() {
+            $( this ).css( "background-color", "#746767" );
+        });
+
+    //Clear local storage button:
+    $("#clear").click(function(){
+        localStorage.clear();
+    });
+
+    myPhotoImages();   
+
+});
+
+function myPhotoImages(){
     if (localStorage["localImages"]) {
-        console.log(localStorage["localImages"].length);
-        var storedImages = JSON.parse(localStorage["localImages"]);
-        console.log(storedImages);
-        var photoString = "";
-        for (i = 0; i < storedImages.length; i++) {
-            photoString="<img src='"+storedImages[i]+"'>";
-            //console.log($('#storagePic_' + i));
-            $('#storagePic_' + i).append(photoString);
-        }
-        //console.log(photoString);
-        //$('#storagePic').append(photoString);
+    var storedImages = JSON.parse(localStorage["localImages"]);
+    console.log(storedImages);
+    console.log(storedImages.length);
+    var count = 0;
+    var photoString = "";
+    //var sizeStyling;
+    for (i = 0; i < storedImages.length; i++) {
+        photoString="<img src='"+storedImages[i]+"'>";
+        $('#storagePic_'+i).html(photoString);
+        count++;
+        /*if(photoString.height() > photoString.width()) {
+            $('#storagePic_'+i).addClass("portrait");
+        } else {
+            $('#storagePic_'+i).addClass("landscape");
+        }*/
+    }
+
+    console.log($('.my_pic img').width());
+
+    if($('.my_pic img').height() > $('.my_pic img').width()) {
+        ($('.my_pic img').addClass("landscape"));
+    } else if ($('.my_pic img').height() < $('.my_pic img').width()) {
+        ($('.my_pic img').addClass("portrait"));
+    }
+
+    console.log(count);
+    //console.log(photoString);
+    //$('#storagePic').append(photoString);
     } else {
         console.log("No stored images");
     }
-
-    /*----------------------Old local storage------------------------*/
-    /*var dataImage = localStorage.getItem('imgData');
-    bannerImg = document.getElementById('storagePic');
-    $(bannerImg).append("<img src='"+dataImage+"'>");
-    console.log(storedImages);
-    bannerImg.src = "data:image/png;base64," + dataImage;*/
-});
+}
 
 function loadPhotos() {
 
     // Hide / display arrow controls
+/*
     if (navRightButton.hasClass('fade-out')) {
         navRightButton.removeClass('fade-out').addClass('fade-in');
     }
+*/
+    /*
+     if (pageNumber < 1) {
+     if (navLeftButton.hasClass('fade-in')) {
+     navLeftButton.removeClass('fade-in').addClass('fade-out');
+     }
+     }
+     */
 
-    if (pageNumber == 1) {
-        if (navLeftButton.hasClass('fade-in')) {
-            navLeftButton.removeClass('fade-in').addClass('fade-out');
-        }
-    } else if (pageNumber > 1) {
-        if (navLeftButton.hasClass('fade-out')) {
-            navLeftButton.removeClass('fade-out').addClass('fade-in');
-        }
+    /* Add the "="" */
+    //if (pageNumber == 1) {
+        /*
+    if (navLeftButton.hasClass('fade-out')) {
+        navLeftButton.removeClass('fade-out').addClass('fade-in');
+    }
+    */
+    // }
+
+    if(searchTerms == null || searchTerms == "") {
+        searchTerms = "random";
     }
 
+    /* Comment this out */
     // Fade out existing photos
-    $('.photo').addClass('fade-out');
+    // $('.photo').addClass('fade-out');
 
     // Mention JSON here
     $.getJSON('https://api.flickr.com/services/rest/?jsoncallback=?', {
         'method': 'flickr.photos.search',
         'api_key': '229833ad396e499afb4c9939fa3f40b6',
         'tags': searchTerms,
-        'page': pageNumber,
-        'per_page': '60',
+        //       'page': pageNumber,
+        //       'per_page': '60',
         'format': 'json'
+
     }, function(data) {
         console.log(data);
         //console.log("Images loaded: " + data.photos.total);
@@ -255,52 +348,54 @@ function loadPhotos() {
             $('<img />').attr({'src': imgURL, 'data-image-num': i}).load(function() {
                 console.log('image loaded');
                 var imageDataNum = $(this).attr('data-image-num');
-                $('#photo-' + imageDataNum).append("<img class='draggable' id='img"+i+"' src='" + imgURL + "' >").removeClass('fade-out').addClass('fade-in');
+                /* Removed fade in fade out here */
+                $('#photo-' + imageDataNum).html("<img class='draggable' id='img"+i+"' src='" + imgURL + "' >");
 
             });
         });
 
-        $('body').on("mousedown", function() {
 
+        /*DRAG'N'DROP*/
+        $(document).off('mousedown', '.draggable').on("mousedown", '.draggable', function() {
             var dragSourceElement;
 
-            $(".draggable").attr('draggable', 'true')
-                .bind('dragstart', function() {
-                dragSourceElement = this;
-                $(this).css({
-                    'opacity': '0.5',
-                    'box-shadow': '0px, 0px, 5px rgba(0, 0, 0, 1)'
+            $(".draggable").attr('draggable', 'true').off('dragstart')
+                .on('dragstart', function() {
+                    console.log("dragStart");
+                    dragSourceElement = this;
+                    $(this).css({
+                        'opacity': '0.5',
+                        'box-shadow': '0px, 0px, 5px rgba(0, 0, 0, 1)'
+                    });
+                }).off('dragend').on('dragend', function() {
+                    console.log("dragEnd");
+                    dragSourceElement = this;
+                    $(this).css({
+                        'opacity': '1',
+                        'box-shadow': 'none'
+                    });
                 });
 
-            }).bind('dragend', function() {
-                dragSourceElement = this;
-                $(this).css({
-                    'opacity': '1',
-                    'box-shadow': 'none'
-                });
+            $('#target').on('dragover', function(event) {
+                imageID = $(this).attr('id');
+                //alert(imageID);
+                event.preventDefault();
             });
 
-            $('#target').each(function(){
-                $(this).bind('dragover', function(event) {
-                    imageID = $(this).attr('id');
-                    //alert(imageID);
-                    event.preventDefault();
-                });
-
-                $(this).bind('drop', function(event) {
-                    event.preventDefault();
-                    //$(dragSourceElement).hide();
-                    alert("Picture added to MyPhotoBook!");
-                    console.log("test");
-                    storagePhoto = dragSourceElement.getAttribute('src');
-                    //add image to array
-                    localImages.push(storagePhoto);
-                    console.log("Added photo to localstorage");
-                    //Save the array to local storage
-                    localStorage["localImages"] = JSON.stringify(localImages);
-                    console.log("String parsed");
-                });
+            $(document).off('drop', '#target').on("drop", '#target', function() {
+                event.preventDefault();
+                //$(dragSourceElement).hide();
+                //console.log("test");
+                storagePhoto = dragSourceElement.getAttribute('src');
+                //add image to array
+                localImages.push(storagePhoto);
+                //console.log("Storage photo "+storagePhoto);
+                //console.log("Added photo to localstorage");
+                //Save the array to local storage
+                localStorage["localImages"] = JSON.stringify(localImages);
+                alert("Picture added to MyPhotoBook!");
             });
+
         });
     });
 }

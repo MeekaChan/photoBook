@@ -4,6 +4,7 @@ html {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    overflow: hidden;
 }
 
 body {
@@ -39,7 +40,6 @@ body {
 .background-button img {
     height: 28px;
     width: auto;
-    /*overflow: hidden;*/
 }
 
 /*SEARCHFORM*/
@@ -56,7 +56,6 @@ body {
 
 #search-box {
     border: none;
-    /*border-bottom: 1px solid #999;*/
     width: 100%;
     text-indent: 5px;
     font-family: "writtenNotes", Arial, sans-serif;
@@ -66,55 +65,51 @@ body {
     font-size: 32pt;
 }
 
-#search_button{
+#search_button {
     height: 38.5px;
     width: 45px;
     border-radius: 6px;
-    /* border: 1px solid black; */
-    color: white !important;
-    font-family: Roboto, Arial, sans-serif;
+    color: white;
     font-weight: 300;
     font-size: 20px;
-    /* float: right; */
     outline: 0;
     background-color: #746767;
-    /* margin-left: 46.35%; */
     position: absolute;
     top: 1.5px;
     right: 2.5px;
-    padding: 0 !important;
 }
 
 /*LOGO*/
+
 #logo {
     font-family: "photobookTitle", Arial, sans-serif;
     font-size: 35px;
     float: right;
     color: white;
     text-shadow: 3px 4px #000;
-    margin: 15px 1px 0px 0px;
+    margin: 15px 1px 0 0;
 }
 
 #logo p {
     margin-top: -30%;
 }
 
-/*FLIPBOOK*/
+/*PHOTOBOOK*/
 
-.photo_album{
+.photo_album {
     width: 800px;
     height: 567px;
     position: absolute;
     left: 50%;
     margin-left: -400px;
-    top: 50%;
-    margin-top: -280px;
+    top: 12%;
+    /*top: 50%;
+    margin-top: -280px;*/
 }
-/*
-#flipbook{
-    width:800px !important;
-    margin:0px auto !important;
-}*/
+
+.red {
+    z-index:1;
+}
 
 #flipbook .page-wrapper{
     -webkit-perspective:2000px;
@@ -126,8 +121,16 @@ body {
 #flipbook.shadow{
     -webkit-box-shadow: 0 4px 10px #000;
     -moz-box-shadow: 0 4px 10px #000;
+    -ms-box-shadow: 0 4px 10px #000;
+    -o-box-shadow: 0 4px 10px #000;
     box-shadow: 0 4px 10px #000;
 }
+
+.hard, .pages{
+    background-color:#f7f7f7;
+}
+
+/*BOOK MESSAGES*/
 
 .bookMessage {
     font-family: "writtenNotes", Arial, sans-serif;
@@ -151,7 +154,7 @@ body {
     font-size: 30px;
 }
 
-/*PHOTO CONTAINER*/
+/*PHOTO PHOTOBOOK*/
 
 #photo-and-controls-container {
     width:400px;
@@ -159,32 +162,22 @@ body {
     overflow: hidden;
 }
 
-/*WHAT IS THIS*/
 [id*="#photo-container-"] {
     width:400px;
 }
 
-/* .photo {
-    width: 330px;
-    height: 182px;
-    margin-bottom: 5px;
-    margin-left: 5px;
-    background-size: cover;
-    background-position: center center;
-    margin-top: 5px;
-} */
-
 .photo {
-  background: #f4f4f4;
-  width: 175px;
-  height: 165px;
-  overflow: hidden;
-  border: 5px solid #f4f4f4;
-  margin-bottom: 10px;
-  margin-top: 5px;
-  box-shadow: 0px 2px 2px 0px rgba(0,0,0,.3);
-  margin-right: 10px;
+    background: #f4f4f4;
+    width: 175px;
+    height: 165px;
+    overflow: hidden;
+    border: 5px solid #f4f4f4;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.3);
+    margin-right: 10px;
 }
+
 /* Even pictures on each page float to the right*/
 .photo:nth-child(even) {float: right;}
 
@@ -193,7 +186,7 @@ body {
 
 /*Put margin on the pages to the left*/
 .even .photo:nth-child(odd) {
-  margin-left: 5px;
+    margin-left: 5px;
 }
 
 /*Old code. Remove?*/
@@ -203,22 +196,61 @@ body {
 
 /*Attempt to frame pictures of different sizes better. If not for this, then they are not so centered.*/
 .photo .draggable {
-  position: relative;
-  left:-20%;
-  top: -20%;
-}
-
-.hard, .pages{
-    background-color:#f7f7f7;
+    position: relative;
+    left:-20%;
+    top: -20%;
 }
 
 /*MYPHOTOBOOK*/
+
+#my_photo_book .shadow,
+#my_photo_book.shadow{
+    -webkit-box-shadow: 0 4px 10px #000;
+    -moz-box-shadow: 0 4px 10px #000;
+    -ms-box-shadow: 0 4px 10px #000;
+    -o-box-shadow: 0 4px 10px #000;
+    box-shadow: 0 4px 10px #000;
+}
 
 #myBackCover {
     -webkit-transform: rotate(180deg);
     -moz-transform: rotate(180deg);
     transform: rotate(180deg);
 }
+
+/*PHOTO MY PHOTOBOOK*/
+
+.my_pic {
+    width:400px;
+    height: 50%;
+}
+
+.my_pic img {
+    /*width: auto;
+    height: 85%;*/
+    margin: 0 auto 0;
+    display: block;
+    padding: 20px;
+    border-radius: 25px;
+}
+
+.landscape {
+    width: 85%;
+    height: auto;
+}
+
+.portrait {
+    width: auto;
+    height: 85%;
+}
+
+/*DRAG'N'DROP*/
+
+.draggable {
+    cursor: move;
+}
+
+/*DRAG AND DROP TARGET*/
 
 #my_photo_book_target {
     position: fixed;
@@ -229,78 +261,146 @@ body {
 }
 
 #my_photo_book_target img {
-    height: 190px;
-    width: auto;
+    width: 200px;
+    height: 240px;
     -webkit-box-shadow: 0 4px 10px #000;
     -moz-box-shadow: 0 4px 10px #000;
     box-shadow: 0 4px 10px #000;
-    /* position: fixed; */
-    /* right: 15px; */
-    /* bottom: 15px; */
-    /* margin-left: 1290px; */
-    /* margin-top: -230px; */
-    /* float: right; */
-    /* margin-bottom: 0px; */
-    /* z-index: 99;*/
-  }
+}
 
 #titleLabel {
     height: 40px;
     background-color: #FFFFEB;
     position: absolute;
-    bottom: 105px;
+    bottom: 115px;
     right: 11px;
-    /* top: 0%; */
     width: 157px;
-    /* float: right; */
-    /* right: 1%; */
     border-radius: 2px;
-    /* z-index: 99; */
-    font-size: 19px;
 }
 
-#bigTitleLabel {
+#label_text{
+    text-align: center;
+    margin-top: 7%;
+    font-size: 19px;
+    color: black;
+    font-family: "photobookTitle", Arial, sans-serif;
+}
+
+#titleLabel_big {
     height: 80px;
     background-color: #FFFFEB;
     position: absolute;
-    /* bottom: 105px; */
-    top: 200px;
-    right: 15px;
-    /* top: 0%; */
+    bottom: 105px;
     width: 300px;
-    /* float: right; */
-    /* right: 1%; */
     border-radius: 7px;
-    /* z-index: 99; */
+    z-index: 99;
+    top: 156px;
+    right: 15px;
+}
+
+#label_text_big {
+    text-align: center;
+    margin-top: 7%;
     font-size: 36px;
+    color: black;
+    font-family: "photobookTitle", Arial, sans-serif;
 }
 
-.label_text{
-  text-align: center;
-  margin-top: 7%;
-  color: black;
-  font-family: "photobookTitle", Arial, sans-serif;
+/*NAVIGATION*/
+
+.nav-button {
+    width: 60px;
+    height: 60px;
+    position: absolute;
+    cursor: pointer;
+    top: 50%;
+    z-index:-2;
 }
 
-/*DRAG'N'DROP*/
-
-.draggable {
-    cursor: move;
+.nav-left {
+    left: -15%;
+    background-image: url('Images/left_arrow.png');
+    -webkit-animation: l_buttonAnimation 3s;
 }
 
-/*#storagePic {
-    height: 100px;
-    width: 100px;
+.nav-right {
+    right: -15%;
+    background-image: url('Images/right_arrow.png');
+    -webkit-animation: r_buttonAnimation 3s;
+}
+
+/*NAVIGATION ANIMATION*/
+
+@-webkit-keyframes r_buttonAnimation {
+    0%{right: 25%; opacity: 0;}
+    100%{right:-15%; opacity: 1;}
+}
+
+@-webkit-keyframes l_buttonAnimation {
+    0%{left: 25%; opacity: 0;}
+    100%{left:-15%; opacity: 1;}
+}
+
+/*CLEAR STORAGE BUTTON*/
+
+#h body {
+    height: 38.5px;
+    width: 90px;
+    border-radius: 6px;
+    font-family: Roboto, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 20px;
+    outline: 0;
+    background-color: grey;
+    position: absolute;
+    top: 1.5px;
+    right: 2.5px;
+}
+
+#clear {
+    height: 38.5px;
+    width: 147px;
+    border-radius: 6px;
+    color: white !important;
+    font-family: Roboto, Arial, sans-serif;
+    font-weight: 300;
+    font-size: 15px;
+    outline: 0;
+    background-color: #746767;
+    position: absolute;
+    bottom: 44.5px;
+    right: 126.5px;
+}
+
+
+
+
+
+
+
+
+/*.note {
+    position: relative;
+}
+
+.note:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-width: 0 16px 16px 0;
+    border-style: solid;
+    border-color: #fff #fff #658E15 #658E15;
+    background: #658E15;
+    -webkit-box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 1px rgba(0,0,0,0.3), -1px 1px 1px rgba(0,0,0,0.2);
 }*/
 
-/*TURN JS-STYLES*/
-/*.hard {
-    background: #f7f7f7;
-}
 
-.pages {
-    background: #f7f7f7;
-}*/
+
+
+
 
 /*LATER FOR FADE ANIMATIONS*/
 @-webkit-keyframes 'fade-in' {
@@ -308,7 +408,7 @@ body {
         opacity: 0.0;
     } to {
           opacity: 1.0;
-    }
+      }
 }
 
 @-webkit-keyframes 'fade-out' {
@@ -316,8 +416,10 @@ body {
         opacity: 1.0;
     } to {
           opacity: 0.0;
-    }
+      }
 }
+
+/*
 
 .fade-in {
     -webkit-animation-name: 'fade-in';
@@ -333,27 +435,4 @@ body {
     -webkit-animation-fill-mode: forwards;
 }
 
-/*NAVIGATION*/
-
-.nav-button {
-    width: 60px;
-    height: 60px;
-    position: absolute;
-    /*top: 350px;*/
-    cursor: pointer;
-    opacity: 0;
-    visibility: hidden;
-    top: 50%;
-}
-
-.nav-left {
-    left: -15%;
-    /*top: 50%;*/
-    background-image: url('Images/left_arrow.png');
-}
-
-.nav-right {
-    right: -15%;
-    /*top: 50%;*/
-    background-image: url('Images/right_arrow.png');
-}
+*/
